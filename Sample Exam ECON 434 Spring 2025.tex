@@ -1,0 +1,293 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\setlength{\parindent}{0pt}
+\title{Sample Exam for ECON434 Spring 2025}
+\author{Master of Quantitative Economics}
+\date{Time Limit: 2 hours}
+
+\begin{document}
+
+\maketitle
+This is the sample exam for the ECON 434 Spring 2025 final. Students are expected to complete all problems within 2 hours. The actual final exam will follow a similar format. It will include at least one reasoning question, one Python coding question, and several theoretical questions. The number of questions for each type may vary.
+
+\section{Reasoning Question}
+\subsection{Basic Concept}
+Please explain the definition of the important term in Machine Learning: \textit{Sparsity}
+\subsection{ECON434 Final Exam, 06/09/2024, Question 2}
+A big problem in the US is health of US citizens. To deal with this problem, some politicians argue that we need to provide universal health insurance like many other countries do. However, it is actually questionable whether providing health insurance improves health, and the costs of insurance may outweigh the benefits. Suppose that to study this issue, a researcher collects a data on a random sample of US citizens, some of which are insured and others are not. Suppose that the researcher than runs a regression of a particular health outcome (say blood presure) on the dummy for insurance (including the constant, of course). Provide at least two mechanisms why the result may be biased (one mechanism should lead to over-estimation of the insurance health benefit, and the other one to under-estimation). Explain formally
+the direction of the bias for each mechanism using the selection bias formula. (You will get some extra points if you provide more than two mechanisms.)
+\section{Coding Question}
+In lecture 12, we discussed the Random Forest Method and how to apply this method via python code. In the lecture slides, there is a line of code writing:
+\begin{center}
+\begin{BVerbatim}
+rf = RandomForestRegressor(n_estimator = 100, 
+                           max_depth = 5,
+                           random_state = 42)
+
+rf.fit(X,Y)
+\end{BVerbatim}
+\end{center}
+Please explain the meaning of the following two arguments in the function:
+\begin{verbatim}
+    n_estimator = 500 & max_depth = 5
+\end{verbatim}
+
+
+\section{Theoretical Questions in Machine Learning}
+\subsection{ECON434 Final Exam, 06/09/2024, Question 1}
+Suppose that we have a pair of random variables, $X$ and $Y$, where $X$ can take three values: -1, 0, and 1, all with equal probabilities. Suppose that we run an OLS regression of $Y$ on $X$ (including the constant). Derive the probability limit of the slope coefficient of such a regression in terms of the conditional mean function $E[Y|X=x], x = -1,0,1$.
+
+\subsection{ECON434 Final Exam, 06/09/2024, Question 3}
+Consider random variables $Y \in \mathbb{R}$, $X \in \mathbb{R}$, and $Z \in \mathbb{R}$. Suppose we are interested in estimating
+\begin{align}
+\theta = \mathbb{E}[Zh(X)^4]
+\end{align}
+
+where
+\begin{align*}
+h(x) = \mathbb{E}[Y|X=x], \text{ }x\in\mathbb{R}.
+\end{align*}
+
+(a). Show that $\theta$ in (1) can be alternatively written as 
+\begin{align}
+\theta = \mathbb{E}[Zh(X)^4+4(Y-h(X))h^3(X)p(X)],
+\end{align}
+where
+\begin{align*}
+    p(x) =\mathbb{E}[Z|X=x], \text{ }x\in\mathbb{R} 
+\end{align*}
+
+(b). Show that the estimating equation (2) satisfies the Neyman orthogonality condition with respect to both $h(x)$ and $p(x)$.
+
+(c). Show that the original estimating equation (1) does not satisfy the Neyman orthogonality condition.  
+\newpage
+\section*{Answer Hints}
+\subsection*{Basic Concept}
+In machine learing, Sparsity refers to the concept that a significant portion of data or parameters are zero or haing a negligible impact in a dataset or model.
+
+Stundents can find reference to this question in the slides of lecture 3, and there two types of sparsity mentioned in the lecture slides: 
+
+1. The first type is \textit{exact sparsity}
+\begin{align*}
+    s = \sum^p_{j=1} \mathbb{I}\{\beta_j \neq 0\} \text{ is small.} 
+\end{align*}
+
+2. The second type is \textit{approximate sparsity}, which means that:
+\begin{itemize}
+    \item{most coefficients are close to zero.}
+    \item{only a small number of coefficients are far away from zero.}
+\end{itemize}
+
+\subsection*{ECON434 Final Exam, 06/09/2024, Question 2}
+As long as the student provides valid explanations, full scores of this question will be given. The answer listed below is from one of last year's student's reponse.
+
+The selection bias formula is as follows:
+\begin{align*}
+\text{Selection Bias} =\ & P(D = 0)\left( \mathbb{E}[Y_1 \mid D = 1] - \mathbb{E}[Y_1 \mid D = 0] \right) \\
+& + P(D = 1)\left( \mathbb{E}[Y_0 \mid D = 1] - \mathbb{E}[Y_0 \mid D = 0] \right)
+\end{align*}
+
+where \( D = 0 \) indicates that the individual is not insured, and \( D = 1 \) indicates that the individual is insured. The term \( \mathbb{E}[Y_1 \mid D = 1] - \mathbb{E}[Y_1 \mid D = 0] \) represents the difference in health outcomes if everyone were insured, between those who choose to be insured and those who do not. Similarly, \( \mathbb{E}[Y_0 \mid D = 1] - \mathbb{E}[Y_0 \mid D = 0] \) represents the difference in health outcomes if no one were insured, between those who choose to be insured and those who do not.
+
+Now consider the mechanism that results in the \textbf{over-estimation} of the insurance health benefits. Individuals who participate in health insurance may be the type of people who care more about their health and tend to have healthier living habits, such as no use of drugs, no smoking, and no use of alcohol. These living habits would yield better health outcomes even without insurance. In the selection bias formula, this results in:
+\[
+\mathbb{E}[Y_1 \mid D = 1] - \mathbb{E}[Y_1 \mid D = 0] > 0 \quad \text{and} \quad \mathbb{E}[Y_0 \mid D = 1] - \mathbb{E}[Y_0 \mid D = 0] > 0
+\]
+Both terms contribute positively to the selection bias, leading to an over-estimation of the insurance health benefit.
+
+Next, consider the second mechanism that results in the \textbf{under-estimation} of the insurance health benefits. Individuals who decide to participate in health insurance may be those with poorer health, anticipating higher healthcare needs. Even with insurance, their observed health outcomes may be worse than those uninsured. In the selection bias formula, this leads to:
+\[
+\mathbb{E}[Y_1 \mid D = 1] - \mathbb{E}[Y_1 \mid D = 0] < 0 \quad \text{and} \quad \mathbb{E}[Y_0 \mid D = 1] - \mathbb{E}[Y_0 \mid D = 0] < 0
+\]
+Both terms contribute negatively to the selection bias, resulting in an under-estimation of the insurance health benefit.
+
+Finally, the third mechanism concerns \textbf{differential access to healthcare resources}. The availability and quality of healthcare can vary significantly by geographic region. Individuals in areas with better health infrastructure and more healthcare providers tend to have better outcomes regardless of insurance. If individuals in such areas are also more likely to be insured, the effect of insurance might be overestimated, as improved outcomes may be due to better access, not insurance itself. In the selection bias formula, this implies:
+\[
+\mathbb{E}[Y_1 \mid D = 1] - \mathbb{E}[Y_1 \mid D = 0] > 0 \quad \text{and} \quad \mathbb{E}[Y_0 \mid D = 1] - \mathbb{E}[Y_0 \mid D = 0] > 0
+\]
+Again, both terms contribute positively, leading to an over-estimation of the insurance health benefit. 
+
+\subsection*{Coding Question}
+Answer to this problem can be found in the slides for lecture 12:
+\begin{itemize}
+    \item{n\_estimators: number of trees in the forest}
+    \item{max\_depth: depth of each tree}
+\end{itemize}
+
+\subsection*{ECON434 Final Exam, 06/09/2024, Question 1}
+Since it applied the OLS regression here, we have the following:
+\begin{align*}
+    E[Y|X=x] = \alpha + \beta x \text{, } x=-1,0,1
+\end{align*}
+with,
+\begin{align*}
+    E[e] &= 0
+    \\cov(e,X) &= 0
+\end{align*}
+Then, we can deduce:
+\begin{align*}
+    E[Y-\alpha-\beta X] &= 0
+    \\E[(Y-\alpha-\beta X)X]&=0
+\end{align*}
+Then we have the following results:
+\begin{align*}
+    \alpha &= E[Y] - \beta E[X] 
+    \\ \beta& = \frac{cov(X,Y)}{Var(X)}
+\end{align*}
+According to the description,
+\begin{align*}
+    E[XY] &= P(X=1)(1)E[Y|X=1]+P(X=0)(0)E[Y|X=0]+P(X=-1)(-1)E[Y|X=-1]
+    \\&= \frac{1}{3}E[Y|X=1]-\frac{1}{3}E[Y|X=-1]
+    \\E[X] &= \sum xP(X=x), \text{for $x =-1,0,1$}
+\end{align*}
+Therefore, $cov(X,Y) = E[XY]-E[X]E[Y] = \frac{1}{3}E[Y|X=1]-\frac{1}{3}E[Y|X=-1]$
+Now consdier the value of $Var(X)$,
+$$Var(X) = E[X^2]-E^2[X] = \frac{2}{3}$$
+Therefore,
+\begin{align*}
+    \beta &= \frac{cov(X,Y)}{Var(X)}
+    \\&=\frac{1}{2}(E[Y|X=1]-E[Y|X=-1])
+\end{align*}
+In conclusion, the probability limit of the slope coefficient of such a regression in terms of the conditional mean function $E[Y|X=x]$, with $x = -1,0,1$ is:
+$$\lim_{n\to \infty}\hat{\beta} \overset{p}{\to} \frac{1}{2}(E[Y|X=1]-E[Y|X=-1])$$
+
+\subsection*{ECON434 Final Exam, 06/09/2024, Question 3}
+(a). To show that \( \theta \) can be rewritten as the formula provided, we have the following:  
+\[
+\theta = \mathbb{E}[Z h(X)^4] = \mathbb{E}[Z h(X)^4 + 4(Y - h(X))h(X)^3 p(X)]
+\]
+
+With the property of expectations:  
+\[
+\mathbb{E}[Z h(X)^4 + 4(Y - h(X))h(X)^3 p(X)] = \mathbb{E}[Z h(X)^4] + \mathbb{E}[4(Y - h(X))h(X)^3 p(X)]
+\]
+
+Then, we need to show that:  
+\[
+\mathbb{E}[4(Y - h(X))h(X)^3 p(x)] = 0
+\]  
+\[
+\mathbb{E}[4(Y - h(X))h(X)^3 p(x)] = 4 \mathbb{E}[Y h(X)^3 p(X)] - 4 \mathbb{E}[h(X)^4 p(X)]
+\]
+
+By applying the law of iterated expectations on the first term on the right hand side, we have:  
+\[
+4 \mathbb{E}[Y h(X)^3 p(X)] = 4 \mathbb{E}[ \mathbb{E}[Y h(X)^3 p(X) \mid X] ] = 4 \mathbb{E}[h(X)^3 p(X) \mathbb{E}[Y \mid X]]
+\]
+
+By definition of \( h(x) = \mathbb{E}[Y \mid X = x],\ x \in \mathbb{R} \):  
+\[
+4 \mathbb{E}[h(X)^3 p(X) \mathbb{E}[Y \mid X]] = 4 \mathbb{E}[h(X)^4 p(X)]
+\]
+
+Therefore,  
+\[
+\mathbb{E}[Z h(X)^4 + 4(Y - h(X))h(X)^3 p(X)] = \mathbb{E}[Z h(X)^4] + \mathbb{E}[4(Y - h(X))h(X)^3 p(X)]
+\]  
+\[
+= \mathbb{E}[Z h(X)^4] + 4 \mathbb{E}[Y h(X)^3 p(X)] - 4 \mathbb{E}[h(X)^4 p(X)]
+\]  
+\[
+= \mathbb{E}[Z h(X)^4] + 4 \mathbb{E}[h(X)^4 p(X)] - 4 \mathbb{E}[h(X)^4 p(X)] = \mathbb{E}[Z h(X)^4]
+\] 
+\[=\theta\]
+
+(b). To prove the estimating equation (2) satisfies the Neyman orthogonality condition, it’s equivalent to prove that the estimating equation is insensitive to the changes of \( h(x) \) and \( p(x) \) (in the course contents, it’s to prove the insensitivity of the estimator to the change of two machine learning estimators used).
+
+First, we consider the small change of \( h(x) = \mathbb{E}[Y|X = x],\ x \in \mathbb{R} \):  
+Assuming that, with a small change we have \( h_{\text{new}}(x) = h(x) + r(\tilde{h}(x) - h(x)) \), then for equation (2), we have:  
+\[
+\theta_h(r) = \mathbb{E}[Z h_{\text{new}}(X)^4 + 4(Y - h_{\text{new}}(X)) h_{\text{new}}(X)^3 p(X)]
+\]
+
+Take the derivative with respect to \( r \):  
+\begin{align*}
+\frac{\partial \theta_h(r)}{\partial r} &= \mathbb{E}[4Z(h(x) + r(\tilde{h}(x) - h(x)))^3 (\tilde{h}(x) - h(x))] \\
+&\quad - \mathbb{E}[4(\tilde{h}(x) - h(x))(h(x) + r(\tilde{h}(x) - h(x)))^3 p(x)] \\
+&\quad + \mathbb{E}[12(\tilde{h}(x) - h(x))(Y - h(x) - r(\tilde{h}(x) - h(x))) (h(x) + r(\tilde{h}(x) - h(x)))^2 p(x)]
+\end{align*}
+
+The third term can be rewritten as:  
+\[
+\mathbb{E}[12(\tilde{h}(x) - h(x))(Y - h_{\text{new}}(x)) h_{\text{new}}(x)^2 p(x)]
+\]
+
+From previous question, we know that:  
+\[
+\mathbb{E}[Y - h(x)|X] = 0
+\]
+
+Therefore:  
+\[
+\mathbb{E}[12(\tilde{h}(x) - h(x))(Y - h_{\text{new}}(x)) h_{\text{new}}(x)^2 p(x)] = 0
+\]
+
+As for the first two terms:
+\begin{align*}
+&\mathbb{E}[4Z(h(x) + r(\tilde{h}(x) - h(x)))^3 (\tilde{h}(x) - h(x))] \\
+&\quad - \mathbb{E}[4(\tilde{h}(x) - h(x))(h(x) + r(\tilde{h}(x) - h(x)))^3 p(x)] \\
+&= 4\mathbb{E}[(\tilde{h}(x) - h(x))(h(x) + r(\tilde{h}(x) - h(x)))^3 (Z - p(x))]
+\end{align*}
+
+By the law of iterated expectations:
+\[
+4\mathbb{E}[(\tilde{h}(x) - h(x))(h(x) + r(\tilde{h}(x) - h(x)))^3 (\mathbb{E}[Z|X = x] - p(x))] = 0
+\]
+
+By definition, \( p(x) = \mathbb{E}[Z|X = x] \), so  
+\[
+\frac{\partial \theta_h(r)}{\partial r} = 0
+\]
+
+Now consider the small change of \( p(x) \).  
+Assuming that, with a small change we have \( p_{\text{new}}(x) = p(x) + r(\tilde{p}(x) - p(x)) \), then we have:  
+\[
+\theta_p(r) = \mathbb{E}[Z h(x)^4 + 4(Y - h(x)) h(x)^3 (p(x) + r(\tilde{p}(x) - p(x)))]
+\]
+
+Then:
+\[
+\frac{\partial \theta_p(r)}{\partial r} = \mathbb{E}[4(Y - h(x)) h(x)^3 (\tilde{p}(x) - p(x))]
+\]
+
+By the law of iterated expectations:
+\[
+= 4\mathbb{E}[h(x)^3 (\tilde{p}(x) - p(x)) \mathbb{E}[Y - h(x)|X = x]]
+\]
+
+By definition \( h(x) = \mathbb{E}[Y|X = x],\ x \in \mathbb{R} \), we have:
+\[
+\mathbb{E}[Y - h(x)|X = x] = 0
+\Rightarrow \frac{\partial \theta_p(r)}{\partial r} = 0
+\]
+
+\textbf{In conclusion}, the estimation equation (2) satisfies the Neyman orthogonality condition with respect to both \( h(x) \) and \( p(x) \).
+
+(c). Similar to question (b), we assume that with a small change, we have  
+\[
+h_{\text{new}}(x) = h(x) + r(\tilde{h}(x) - h(x))
+\]
+
+Then:
+\[
+\theta(r) = \mathbb{E}[Z h_{\text{new}}(x)^4]
+\]
+
+\[
+\frac{\partial \theta(r)}{\partial r} = \mathbb{E}\left[4Z (h(x) + r (\tilde{h}(x) - h(x)))^3 (\tilde{h}(x) - h(x))\right]
+\]
+
+Since \( r \) is arbitrarily chosen, \( Z \) is a random variable here, and \( Z \) and \( h(x) \) are not necessarily independent of each other, then  
+\[
+\frac{\partial \theta(r)}{\partial r} \neq 0
+\]
+for arbitrary \( r \).  
+
+Therefore, the estimating equation (1) does not satisfy the Neyman orthogonality condition.
+
+\textit{Note:The answers provided for the last two questions are based on a response from a student in last year’s class. They are intended for reference only and do not imply that your solutions must be as detailed as this.}
+\end{document}
