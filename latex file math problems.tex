@@ -1,0 +1,123 @@
+\documentclass{article}
+\usepackage{graphicx} 
+\usepackage{graphicx} 
+\usepackage{enumitem} 
+\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
+
+\title{Math Problems}
+\author{YILONG LIU}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Question 1: An unbiased estimator of the variance of i.i.d random variables}
+Let $(Y_i)_{1\leq i \leq n}$ be n i.i.d random variables. Let $\bar{Y} = \frac{1}{n} \sum^n_{i=1}{Y_i}$ denote the average of these variables. Let $Y$ be a random variable with the same distribution as the $Y_i$s. The goal of the exercise is to show that $\frac{1}{n-1} \sum^n_{i=1}{(Y_i - \bar{Y})^2}$ is an unbiased estimator of $V(Y)$, the variance of the $Y_i$s.
+\begin{enumerate}[label=(\arabic*), leftmargin=*, align=left]
+    \item Show that 
+    $\frac{1}{n-1} \sum^n_{i=1} (Y_i - \bar{Y})^2 = \frac{1}{n-1}\sum^n_{i=1}{Y^2_i}-\frac{n}{n-1}(\bar{Y})^2$.
+
+    \item Use the result in question 1) to prove that 
+    $E\left(\frac{1}{n-1} \sum^n_{i=1}(Y_i-\bar{Y})^2\right)=V(Y)$.
+\end{enumerate}
+
+\subsection{Question (1) Solution}
+We can expand the left hand side equation and have:
+\begin{align*}
+\frac{1}{n-1} \sum^n_{i=1} (Y_i-\bar{Y})^2 &= \frac{1}{n-1}\sum^n_{i=1}(Y^2_i-2 Y_i \bar{Y}+\bar{Y}^2)
+\\&=\frac{1}{n-1} (\sum^n_{i=1} Y^2_i) - \frac{2}{n-1}\bar{Y}(\sum^n_{i=1} Y_i)+\frac{n}{n-1}\bar{Y}^2
+\\&=\frac{1}{n-1}\sum^n_{i=1}Y^2_i - \frac{2}{n-1}\bar{Y}{n \bar{Y}} + \frac{n}{n-1}\bar{Y}^2
+\\&=\frac{1}{n-1} \sum^n_{i=1}Y^2_i - \frac{n}{n-1}\bar{Y}^2
+\end{align*}
+
+\subsection{Quesiton (2) Solution}
+According to the result in question (1), we have the following:
+\begin{align*}
+E[\frac{1}{n-1}\sum^n_{i=1}(Y_i - \bar{Y})^2] &= E[\frac{1}{n-1} \sum^n_{i=1}Y^2_i - \frac{n}{n-1}(\bar{Y})^2]
+\\&=\frac{1}{n-1}E[\sum^n_{i=1}Y^2_i] - \frac{n}{n-1}E[\bar{Y}^2]
+\\&=E[\frac{1}{n-1}\sum^n_{i=1}Y^2_i]-E[\frac{n}{n-1}\bar{Y}^2]
+\\&=E[Y^2] - E^2[Y]
+\end{align*}
+\textit{Note: As $\frac{1}{n-1} \sum^n_{i=1}Y^2_i$ is the unbiased estimator of $E[Y^2]$.}
+
+\section{Exercise 1, Question 2: A super consistent estimator}
+
+Assume you observe an iid sample of $n$ random variables $(Y_i)_{1 \leq i \leq n}$ following the uniform distribution on $[0, \theta]$, where $\theta$ is an unknown strictly positive real number we would like to estimate. Let $Y$ be a random variable with the same distribution as the $Y_i$s.
+
+\begin{enumerate}[label=(\arabic*), leftmargin=*, align=left]
+    \item Compute $E(Y)$. Write $\theta$ as a function of $E(Y)$.
+    \item Use question  (1) to propose an estimator $\hat{\theta}_{MM}$ for $\theta$ using the method of moments (reminder: that method amounts to replacing expectations by sample means).
+    \item Show that $\hat{\theta}_{MM}$ is an asymptotically normal estimator of $\theta$, and show that its asymptotic variance is $4V(Y)$.
+\end{enumerate}
+
+\noindent Consider the following alternative estimator for $\theta$: $\hat{\theta}_{ML} = \max\limits_{1 \leq i \leq n} \{ Y_i \}$.
+
+\begin{enumerate}[label=(\arabic*), start=4, leftmargin=*, align=left]
+    \item Why does using $\hat{\theta}_{ML}$ to estimate $\theta$ sounds like a natural idea?
+    \item Show that
+    \[
+    P(\hat{\theta}_{ML} \leq x) = \left\{
+    \begin{array}{ll}
+    0 & \text{if } x < 0 \\
+    \left( \frac{x}{\theta} \right)^n & \text{if } x \in [0, \theta] \\
+    1 & \text{if } x > \theta
+    \end{array}
+    \right.
+    \]
+\end{enumerate}
+\subsection{Question (1) Solution}
+By definition:
+$$E[Y] = \int^{\theta}_{0}y\cdot f(y)dy$$
+As it is uniform distribution: $f(y) = \frac{1}{\theta}$
+Then we have the follows:
+\begin{align*}
+E[Y] &= \int^{\theta}_{0}\frac{y}{\theta}dy
+\\&= \frac{1}{2\theta}\cdot y^2|^{\theta}_0
+\\&=\frac{\theta}{2}
+\end{align*}
+Therefore, $E[Y] = \frac{\theta}{2}$, $\theta = 2E[Y]$.
+
+\subsection{Question (2) Solution}
+From (1), $\theta = 2E[Y]$, we propose that the estimator $\hat{\theta}_{MM}$ for $\theta$ to be:
+$$\hat{\theta}_{MM} = \frac{2}{n} \sum^{n}_{i=1}Y_i$$
+based on n random variables $(Y_i)_{1\leq i \leq n}$.
+
+\subsection{Question (3) Solution}
+From (1), $\theta = 2E[Y]$, we propose that the estimator $\hat{\theta}_{MM}$ for $\theta$ to be:
+\[
+\hat{\theta}_{MM} = \frac{2}{n} \sum^{n}_{i=1}Y_i
+\]
+based on $n$ random variables $(Y_i)_{1\leq i \leq n}$.
+
+By the Central Limit Theorem, we have:
+\[
+\sqrt{n}\left(\frac{1}{n}\sum^{n}_{i=1}Y_i - E[Y]\right) \xrightarrow{d} \mathcal{N}(0, V(Y))
+\]
+which implies that
+\[
+\sqrt{n}(\hat{\theta}_{MM} - \theta) = \sqrt{n} \left( 2\bar{Y} - 2E[Y] \right) = 2\sqrt{n}(\bar{Y} - E[Y]) \xrightarrow{d} \mathcal{N}(0, 4V(Y)).
+\]
+
+Therefore, $\hat{\theta}_{MM}$ is an asymptotically normal estimator of $\theta$, and its asymptotic variance is $4V(Y)$.
+
+\subsection{Question (4) Solution}
+It is because that the random variables $(Y_i)_{1\leq i \leq n}$ follows a uniform distribution on $[0, \theta]$.
+Therefore for any $i$ such that $1 \leq i \leq n$, we have $Y_i \in [0, \theta]$, and it is then a natural idea to assume the key parameter $\hat{\theta}_{ML} = max_{1\leq i \leq n} {Y_i}$.
+
+\subsection{Question (5) Solution}
+By definition, $P(\hat{\theta}_{ML} \leq x) = P(max_{1\leq i \leq n} \{Y_i\} \leq x)$, then:
+
+if $x < 0$, then the probility is 0 as $Y_i \in [0, \theta] $ for any $i$.
+
+if $x \in [0, \theta]$, then:
+\begin{align*}
+P(max_{1\leq i \leq n} \{Y_i\} \leq x) &= \Pi^{n}_{i=1} P(Y_i\leq x)
+\\&= \Pi^n_{i=1} F(X)
+\\&= (\frac{x-0}{\theta - 0})^n
+\\&= (\frac{x}{\theta})^n
+\end{align*}
+
+if $x > \theta$, then the probability is 1 as $Y_i \in [0, \theta] $ for any $i$.
+\end{document}
